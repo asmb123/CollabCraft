@@ -12,6 +12,8 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import {v4 as uuid4} from "uuid"
+import { toast } from "sonner"
 
 
 const formSchema = z.object({
@@ -29,11 +31,14 @@ export function ProfileForm() {
         // },
     })
 
-    // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         console.log(values)
+    }
+
+    function onGenerate() {
+        console.log("Generating")
+        form.setValue("room_id", uuid4())
+        toast("Generated room id")
     }
 
     return (
@@ -68,8 +73,10 @@ export function ProfileForm() {
                             <FormDescription>
                                 Enter room id
                             </FormDescription>
+                            <button onClick={() => onGenerate()} className="underline hover:cursor-pointer">Generate new room id</button>
                             <FormMessage />
                         </FormItem>
+
                     )}
                 />
                 <Button type="submit">Submit</Button>
