@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import {v4 as uuid4} from "uuid"
 import { toast } from "sonner"
+import { redirect } from "react-router"
 
 
 const formSchema = z.object({
@@ -33,6 +34,8 @@ export function ProfileForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
+        redirect('/page')
+        
     }
 
     function onGenerate() {
