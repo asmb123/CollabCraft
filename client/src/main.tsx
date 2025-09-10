@@ -8,13 +8,15 @@ import Page from './Page.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<App />} />
-          <Route path='/page' element={<Page />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={
+          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <App />
+          </ThemeProvider>
+        } />
+        <Route path='/page' element={<Page />} />
+      </Routes>
+    </BrowserRouter>
   </StrictMode >,
 )
