@@ -10,7 +10,10 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
 	console.log("User joined : ", socket.id);
-    
+	socket.on("send-changes", (delta) => {
+		console.log(delta);
+		socket.broadcast.emit("receive-changes", delta);
+	});
 });
 
 httpServer.listen(3000);
