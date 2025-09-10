@@ -1,9 +1,18 @@
 import Quill from "quill";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { io } from "socket.io-client";
 import "quill/dist/quill.snow.css";
 import "@/editor.css"
 
 export default function TextEditor() {
+
+  useEffect(() => {
+    const socket = io("http://localhost:3000");
+
+    return () => {
+      socket.disconnect();
+    }
+  })
   const wrapperRef = useCallback((wrapper: HTMLDivElement) => {
     if (wrapper == null) return;
     wrapper.innerHTML = "";
