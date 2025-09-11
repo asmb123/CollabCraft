@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
             <App />
           </ThemeProvider>
         } />
-        <Route path='/page' element={<Page />} />
+        <Route path='/page/:id' element={<Page />} />
       </Routes>
     </BrowserRouter>
   </StrictMode >,

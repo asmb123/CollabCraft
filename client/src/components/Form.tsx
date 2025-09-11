@@ -12,9 +12,9 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {v4 as uuid4} from "uuid"
+import { v4 as uuid4 } from "uuid"
 import { toast } from "sonner"
-import { redirect } from "react-router"
+import { useNavigate } from "react-router"
 
 
 const formSchema = z.object({
@@ -23,6 +23,9 @@ const formSchema = z.object({
 })
 
 export function ProfileForm() {
+
+    const router = useNavigate();
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -34,8 +37,7 @@ export function ProfileForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
-        redirect('/page')
-        
+        router(`/page/${values.room_id}`)
     }
 
     function onGenerate() {
@@ -76,7 +78,7 @@ export function ProfileForm() {
                             <FormDescription>
                                 Enter room id
                             </FormDescription>
-                            <button onClick={() => onGenerate()} className="underline hover:cursor-pointer">Generate new room id</button>
+                            <button type="button" onClick={() => onGenerate()} className="underline hover:cursor-pointer">Generate new room id</button>
                             <FormMessage />
                         </FormItem>
 
