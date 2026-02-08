@@ -10,9 +10,14 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
 	console.log("User joined : ", socket.id);
-	socket.on("send-changes", (delta) => {
+
+	socket.on("join-room", (id)=>{
+		socket.join(id);
+	})
+	socket.on("send-changes", (id, delta) => {
 		console.log(delta);
-		socket.broadcast.emit("receive-changes", delta);
+		// socket.broadcast.emit("receive-changes", delta);
+		socket.to(id).emit("receive-changes", delta);
 	});
 });
 
